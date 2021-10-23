@@ -1,5 +1,5 @@
 const { addOne, getAll, updateOne } = require('../../models/modelShippers');
-const { statusCode } = require('../../constants/statusCode');
+const { statusCode } = require('../../utils/statusCode');
 const validations = require('./validationsShipper');
 
 const getAllShippers = async () => {
