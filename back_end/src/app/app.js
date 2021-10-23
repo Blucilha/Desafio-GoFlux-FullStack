@@ -6,7 +6,7 @@ const {
     routerTransporter,
     routeOffer,
     routerThrow,
-} = require('./controllers/router');
+} = require('./router');
 
 const app = express();
 
@@ -21,4 +21,4 @@ app.use(routerTransporter);
 app.use(routeOffer);
 app.use(routerThrow);
 
-app.listen(3000, () => console.log('logado na port 3000!'));
+module.exports = app;

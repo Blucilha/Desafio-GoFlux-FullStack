@@ -1,8 +1,8 @@
 const express = require('express');
-const controllerShipper = require('./controllerShipper');
-const controllerTransporter = require('./controllerTransporter');
-const controllerOffer = require('./controllerOffer');
-const controllerThrow = require('./controllerThrow');
+const controllerShipper = require('../controllers/controllerShipper');
+const controllerTransporter = require('../controllers/controllerTransporter');
+const controllerOffer = require('../controllers/controllerOffer');
+const controllerThrow = require('../controllers/controllerThrow');
 
 const routerShipper = express.Router();
 routerShipper.get('/shipper', controllerShipper.getAll);

@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable complexity */
 /* eslint-disable no-empty */
-const { statusCode } = require('../../constants/statusCode');
+const { statusCode } = require('../../utils/statusCode');
 
 const validationThrow = (Throw) => {
     const {

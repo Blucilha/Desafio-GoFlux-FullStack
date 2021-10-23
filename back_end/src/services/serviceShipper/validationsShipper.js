@@ -1,4 +1,4 @@
-const { statusCode } = require('../../constants/statusCode');
+const { statusCode, numbers } = require('../../utils/statusCode');
 
 const validationBody = (shipper) => {
     const { name, doc, about, site } = shipper;
@@ -12,7 +12,7 @@ const validationBody = (shipper) => {
 
 const validationCNPJ = (shipper) => {
     const { doc } = shipper;
-    if (doc.length !== 14) {
+    if (doc.length !== numbers.NUMBER_EIGHTEEN) {
         return {
             code: statusCode.BAD_REQUEST,
             message: 'CNPJ inválido.',

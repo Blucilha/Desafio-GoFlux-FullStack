@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const { addOne, getAll, getAllById } = require('../../models/modelThrows');
-const { statusCode } = require('../../constants/statusCode');
+const { statusCode } = require('../../utils/statusCode');
 const validations = require('./validationsThrows');
 
 const getAllThrow = async () => {
