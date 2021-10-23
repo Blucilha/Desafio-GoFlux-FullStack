@@ -1,5 +1,6 @@
 const { addOne, getAll, updateOne } = require('../../models/modelShippers');
 const { statusCode } = require('../../constants/statusCode');
+const validations = require('./validationsShipper');
 
 const getAllShippers = async () => {
     const result = await getAll();
@@ -10,6 +11,13 @@ const getAllShippers = async () => {
 };
 
 const addShipper = async (shipper) => {
+    const bodyIsValid = validations.validationBody(shipper);
+    const CNPJisValid = validations.validationCNPJ(shipper);
+
+    if (bodyIsValid || CNPJisValid) {
+        return bodyIsValid || CNPJisValid;
+    }
+
     const allShippers = await getAll();
 
     const result = await addOne({
@@ -18,12 +26,19 @@ const addShipper = async (shipper) => {
     });
 
     return {
-        code: statusCode.STATUS_OK,
+        code: statusCode.CREATED,
         message: result,
     };
 };
 
 const updateShipper = async (id, shipper) => {
+    const bodyIsValid = validations.validationBody(shipper);
+    const CNPJisValid = validations.validationCNPJ(shipper);
+
+    if (bodyIsValid || CNPJisValid) {
+        return bodyIsValid || CNPJisValid;
+    }
+
     const result = await updateOne(+id, shipper);
     return {
         code: statusCode.STATUS_OK,

@@ -1,5 +1,6 @@
 const { addOne, getAll, updateOne } = require('../../models/modelTransporter');
 const { statusCode } = require('../../constants/statusCode');
+const validations = require('./validationsTransporter');
 
 const getAllTransporter = async () => {
     const result = await getAll();
@@ -11,6 +12,13 @@ const getAllTransporter = async () => {
 };
 
 const addTransporter = async (Transporter) => {
+    const bodyIsValid = validations.validationBody(Transporter);
+    const CNPJisValid = validations.validationCNPJ(Transporter);
+
+    if (bodyIsValid || CNPJisValid) {
+        return bodyIsValid || CNPJisValid;
+    }
+
     const allTransporter = await getAll();
 
     const result = await addOne({
@@ -19,12 +27,19 @@ const addTransporter = async (Transporter) => {
     });
 
     return {
-        code: statusCode.STATUS_OK,
+        code: statusCode.CREATED,
         message: result,
     };
 };
 
 const updateTransporter = async (id, Transporter) => {
+    const bodyIsValid = validations.validationBody(Transporter);
+    const CNPJisValid = validations.validationCNPJ(Transporter);
+
+    if (bodyIsValid || CNPJisValid) {
+        return bodyIsValid || CNPJisValid;
+    }
+
     const result = await updateOne(id, Transporter);
     return {
         code: statusCode.STATUS_OK,

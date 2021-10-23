@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const connection = require('./connection');
 
 const TABLE = 'offers';
@@ -20,7 +21,7 @@ const getAll = async () => {
 
 const getAllById = async (id) => {
     const result = await connection()
-        .then((db) => db.collection(TABLE).find({ id: +id }).toArray())
+        .then((db) => db.collection(TABLE).find({ id_customer: +id }).toArray())
         .then(format)
         .catch((err) => {
             console.log('getOffer:', err.messsage);
