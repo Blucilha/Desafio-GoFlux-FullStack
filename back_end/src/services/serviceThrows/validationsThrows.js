@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable complexity */
 /* eslint-disable no-empty */
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 
 const validationThrow = (Throw) => {
     const {
@@ -18,7 +18,7 @@ const validationThrow = (Throw) => {
         
     ) {
         return {
-            code: statusCode.BAD_REQUEST,
+            code: code.BAD_REQUEST,
             message: 'All fields must be filled.',
         };
     }

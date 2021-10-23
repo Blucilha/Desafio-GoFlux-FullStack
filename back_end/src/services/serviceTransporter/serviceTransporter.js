@@ -1,12 +1,12 @@
 const { addOne, getAll, updateOne } = require('../../models/modelTransporter');
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 const validations = require('./validationsTransporter');
 
 const getAllTransporter = async () => {
     const result = await getAll();
     
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -27,7 +27,7 @@ const addTransporter = async (Transporter) => {
     });
 
     return {
-        code: statusCode.CREATED,
+        code: code.CREATED,
         message: result,
     };
 };
@@ -42,7 +42,7 @@ const updateTransporter = async (id, Transporter) => {
 
     const result = await updateOne(id, Transporter);
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };

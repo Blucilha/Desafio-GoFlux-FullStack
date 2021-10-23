@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable complexity */
 /* eslint-disable no-empty */
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 
 const validationOffer = (offer) => {
     const {
@@ -21,7 +21,7 @@ const validationOffer = (offer) => {
         || amount_type === ''
     ) {
         return {
-            code: statusCode.BAD_REQUEST,
+            code: code.BAD_REQUEST,
             message: 'All fields must be filled.',
         };
     }
@@ -30,7 +30,7 @@ const validationOffer = (offer) => {
 const validationCustomer = (customer) => {
     if (customer === '') {
         return {
-            code: statusCode.BAD_REQUEST,
+            code: code.BAD_REQUEST,
             message: 'Id not found.',
         };
     }

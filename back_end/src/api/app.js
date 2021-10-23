@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const {
     routerShipper,
@@ -14,11 +13,12 @@ app.use(cors({
     origin: '*',
 }));
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(routerShipper);
 app.use(routerTransporter);
 app.use(routeOffer);
 app.use(routerThrow);
+app.all('*', (_req, res) => res.status(404).json({ message: 'Not Found' }));
 
 module.exports = app;

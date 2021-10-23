@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 const { addOne, getAll, getAllById } = require('../../models/modelThrows');
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 const validations = require('./validationsThrows');
 
 const getAllThrow = async () => {
     const result = await getAll();
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -14,7 +14,7 @@ const getAllThrow = async () => {
 const getAllThrowByProvider = async (id) => {
     const result = await getAllById(+id);
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -34,7 +34,7 @@ const addThrow = async (Throw, provider) => {
     });
 
     return {
-        code: statusCode.CREATED,
+        code: code.CREATED,
         message: result,
     };
 };

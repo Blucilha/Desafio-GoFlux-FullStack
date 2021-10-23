@@ -1,11 +1,11 @@
 const { addOne, getAll, updateOne } = require('../../models/modelShippers');
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 const validations = require('./validationsShipper');
 
 const getAllShippers = async () => {
     const result = await getAll();
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -26,7 +26,7 @@ const addShipper = async (shipper) => {
     });
 
     return {
-        code: statusCode.CREATED,
+        code: code.CREATED,
         message: result,
     };
 };
@@ -41,7 +41,7 @@ const updateShipper = async (id, shipper) => {
 
     const result = await updateOne(+id, shipper);
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };

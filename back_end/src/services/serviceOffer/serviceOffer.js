@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 const { addOne, getAll, getAllById } = require('../../models/modelOffer');
-const { statusCode } = require('../../utils/statusCode');
+const { code } = require('../../utils/code');
 const validations = require('./validationsOffer');
 
 const getAllOffer = async () => {
     const result = await getAll();
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -20,7 +20,7 @@ const getAllOfferById = async (customer) => {
 
     const result = await getAllById(+customer);
     return {
-        code: statusCode.STATUS_OK,
+        code: code.STATUS_OK,
         message: result,
     };
 };
@@ -44,7 +44,7 @@ const addOffer = async (offer, customer) => {
     });
 
     return {
-        code: statusCode.CREATED,
+        code: code.CREATED,
         message: result,
     };
 };
