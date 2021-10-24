@@ -1,28 +1,28 @@
 const express = require('express');
-const controllerShipper = require('../controllers/controllerShipper');
-const controllerTransporter = require('../controllers/controllerTransporter');
-const controllerOffer = require('../controllers/controllerOffer');
-const controllerThrow = require('../controllers/controllerThrow');
+const shipperController = require('../controllers/shipperController');
+const transporterController = require('../controllers/transporterController');
+const offerController = require('../controllers/offerController');
+const throwController = require('../controllers/throwController');
 
 const routerShipper = express.Router();
-routerShipper.get('/shipper', controllerShipper.getAll);
-routerShipper.post('/register-shipper', controllerShipper.addOne);
-routerShipper.put('/update-shipper/:id', controllerShipper.updateOne);
+routerShipper.get('/shipper', shipperController.getAllShippers);
+routerShipper.post('/register-shipper', shipperController.createShipper);
+routerShipper.put('/update-shipper/:id', shipperController.updateShipper);
 
 const routerTransporter = express.Router();
-routerTransporter.get('/transporter', controllerTransporter.getAll);
-routerTransporter.post('/register-transporter', controllerTransporter.addOne);
-routerTransporter.put('/update-transporter/:id', controllerTransporter.updateOne);
+routerTransporter.get('/transporter', transporterController.getAllTransporters);
+routerTransporter.post('/register-transporter', transporterController.createTransporter);
+routerTransporter.put('/update-transporter/:id', transporterController.updateTransporter);
 
 const routeOffer = express.Router();
-routeOffer.get('/offer', controllerOffer.getAll);
-routeOffer.get('/offer/:id', controllerOffer.getAllById);
-routeOffer.post('/register-offer/:id', controllerOffer.addOne);
+routeOffer.get('/offer', offerController.getAllOffers);
+routeOffer.get('/offer/:id', offerController.getAllOffersById);
+routeOffer.post('/register-offer/:id', offerController.createOffer);
 
 const routerThrow = express.Router();
-routerThrow.get('/throw', controllerThrow.getAll);
-routerThrow.get('/throw/:id', controllerThrow.getAllById);
-routerThrow.post('/register-throw/:id', controllerThrow.addOne);
+routerThrow.get('/throw', throwController.getAllThrows);
+routerThrow.get('/throw/:id', throwController.getAllThrowsByIdProvider);
+routerThrow.post('/register-throw/:id', throwController.createThrow);
 
 module.exports = {
     routerShipper,
