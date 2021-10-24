@@ -20,6 +20,7 @@ const routeOffer = express.Router();
 routeOffer.get('/offer', offerController.getAllOffers);
 routeOffer.get('/offer/:id', offerController.getAllOffersById);
 routeOffer.post('/register-offer/:id', offerController.createOffer);
+routeOffer.delete('/offer', offerController.deleteOffersById);
 
 const routerThrow = express.Router();
 routerThrow.get('/throw', throwController.getAllThrows);

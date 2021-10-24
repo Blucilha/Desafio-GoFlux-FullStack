@@ -23,8 +23,8 @@ const createTransporter = async (Transporter) => {
     const { error } = schemas.createTransporter.validate(Transporter);
     if (error) throw clientError.badRequest(error.details[0].message);
     
-    const existShipper = await transporterModel.getAllTransporterByDoc(Transporter.doc);
-    if (existShipper.length > 0) throw clientError.unauthorized('Client existent!');
+    const existTransporter = await transporterModel.getAllTransporterByDoc(Transporter.doc);
+    if (existTransporter.length > 0) throw clientError.unauthorized('Client existent!');
 
     const result = await transporterModel.createTransporter(Transporter);
     if (result === null) throw serverError.internalServerError();

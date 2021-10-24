@@ -1,67 +1,53 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable camelcase */
 const offerModel = require('../models/offerModel');
-const { code } = require('../utils/code');
-const { message } = require('../utils/message');
-const schema = require('../schemas/offerSchema');
+const clientError = require('../utils/clientError');
+const serverError = require('../utils/serverError');
+const schemas = require('../schemas/offerSchema');
 
 const getAllOffers = async () => {
     const result = await offerModel.getAllOffers();
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    if (result === null) throw serverError.internalServerError();
+
+    return result;
 };
 
-const getAllOffersById = async (id_customer) => {
-    const result = await offerModel.getOffersById(id_customer);
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
+const getAllOffersByCustomer = async (id_customer) => {
+    const result = await offerModel.getOffersByIdCustomer(id_customer);
+    if (result === null) throw serverError.internalServerError();
+    if (result.length === 0) throw clientError.notFound();
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    return result;
 };
 
 const createOffer = async (offer, id_customer) => {
-    const { error } = schema.createOffer.validate({ id_customer, ...offer });
+    const { id, ...rest } = offer;
+    const { error } = schemas.createOffer.validate({ id, id_customer, ...rest });
+    if (error) throw clientError.badRequest(error.details[0].message);
+    
+    const existShipper = await offerModel.getOffersByIdCustomer(id_customer);
+    if (existShipper.length > 0) throw clientError.unauthorized('Offer existent!');
 
-    if (error) {
-        return {
-            code: code.BAD_REQUEST,
-            message: error.details[0].message,
-        };
-    }
+    const result = await offerModel.createOffer({ id, id_customer, ...rest });
+    if (result === null) throw serverError.internalServerError();
+    
+    return 'Create sucess!';
+};
 
-    const result = await offerModel.createOffer({ ...offer, id_customer });
+const deleteOffer = async (id) => {
+    const existOffer = await offerModel.getOffersById(id);
+    if (existOffer.length === 0) throw clientError.unauthorized('Offer not existent!');
 
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
-
-    return {
-        code: code.CREATED,
-        message: message.CREATE_SUCESS,
-    };
+    const result = await offerModel.deleteOffer(id);
+    if (result === null) throw serverError.internalServerError();
+    
+    return 'Delete sucess!';
 };
 
 module.exports = {
     getAllOffers,
     createOffer,
-    getAllOffersById,
+    getAllOffersByCustomer,
+    deleteOffer,
 };
