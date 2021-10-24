@@ -1,65 +1,50 @@
 const transporterModel = require('../models/transporterModel');
-const { code } = require('../utils/code');
-const { message } = require('../utils/message');
+const clientError = require('../utils/clientError');
+const serverError = require('../utils/serverError');
 const schemas = require('../schemas/transporterSchema');
 
 const getAllTransporters = async () => {
     const result = await transporterModel.getAllTransporters();
 
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
+    if (result === null) throw serverError.internalServerError();
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    return result;
+};
+
+const getAllTransporterByDoc = async (doc) => {
+    const result = await transporterModel.getAllTransporterByDoc(doc);
+    if (result === null) throw serverError.internalServerError();
+    if (result.length === 0) throw clientError.notFound();
+
+    return result;
 };
 
 const createTransporter = async (Transporter) => {
     const { error } = schemas.createTransporter.validate(Transporter);
+    if (error) throw clientError.badRequest(error.details[0].message);
+    
+    const existShipper = await transporterModel.getAllTransporterByDoc(Transporter.doc);
+    if (existShipper.length > 0) throw clientError.unauthorized('Client existent!');
 
-    if (error) {
-        return {
-            code: code.BAD_REQUEST,
-            message: error.details[0].message,
-        };
-    }
-
-    const result = await transporterModel.createTransporte(Transporter);
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
-
-    return {
-        code: code.CREATED,
-        message: message.CREATE_SUCESS,
-    };
+    const result = await transporterModel.createTransporter(Transporter);
+    if (result === null) throw serverError.internalServerError();
+    
+    return 'Create sucess!';
 };
 
 const updateTransporter = async (id, Transporter) => {
-    const result = await transporterModel.updateTransporter(id, Transporter);
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
+    const { error } = schemas.updateTransporter.validate(Transporter);
+    if (error) throw clientError.badRequest(error.details[0].message);
 
-    return {
-        code: code.STATUS_OK,
-        message: message.UPDATE_SUCESS,
-    };
+    const result = await transporterModel.updateTransporter(id, Transporter);
+    if (result === null) throw serverError.internalServerError();
+
+    return 'Update success!';
 };
 
 module.exports = {
     createTransporter,
     getAllTransporters,
     updateTransporter,
+    getAllTransporterByDoc,
 };

@@ -8,9 +8,9 @@ const getAllShippers = rescue(async (_req, res) => {
     res.status(success.OK).json({ message: result });
 });
 
-const getAllShipperById = rescue(async (req, res) => {
+const getAllShipperByDoc = rescue(async (req, res) => {
     const { doc } = req.body;
-    const result = await shipperService.getAllShipperById(doc);
+    const result = await shipperService.getAllShipperByDoc(doc);
 
     res.status(success.OK).json({ message: result });
 });
@@ -35,5 +35,5 @@ module.exports = {
     getAllShippers,
     createShipper,
     updateShipper,
-    getAllShipperById,
+    getAllShipperByDoc,
 };
