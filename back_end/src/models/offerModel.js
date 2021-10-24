@@ -19,7 +19,7 @@ const getAllOffers = async () => {
     }
 };
 
-const getOffersById = async (id) => {
+const getOffersByIdCustomer = async (id) => {
     const db = await connection();
     try {
         const result = await db.collection(OFFER).find({ id_customer: id }).toArray();
@@ -31,8 +31,20 @@ const getOffersById = async (id) => {
     }
 };
 
+const getOffersById = async (id) => {
+    const db = await connection();
+    try {
+        const result = await db.collection(OFFER).find({ id }).toArray();
+        const format = formater(result);
+        return format;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
 const createOffer = async (offer) => {
-    const db = connection();
+    const db = await connection();
     try {
         const result = db.collection(OFFER).insertOne(offer);
         return result;
@@ -58,4 +70,5 @@ module.exports = {
     getOffersById,
     createOffer,
     deleteOffer,
+    getOffersByIdCustomer,
 };

@@ -1,32 +1,40 @@
+const rescue = require('express-rescue');
 const offerService = require('../services/offerService');
+const success = require('../utils/success');
 
-const getAllOffers = async (_req, res) => {
+const getAllOffers = rescue(async (_req, res) => {
     const result = await offerService.getAllOffers();
-    const { code, message } = result;
 
-    res.status(code).json(message);
-};
+    res.status(success.OK).json({ message: result });
+});
 
-const createOffer = async (req, res) => {
+const createOffer = rescue(async (req, res) => {
     const { body, params } = req;
 
     const result = await offerService.createOffer(body, params.id);
-    const { code, message } = result;
 
-    res.status(code).json(message);
-};
+    res.status(success.Created).json({ message: result });
+});
 
-const getAllOffersById = async (req, res) => {
+const getAllOffersById = rescue(async (req, res) => {
     const { params } = req;
 
-    const result = await offerService.getAllOffersById(params.id);
-    const { code, message } = result;
+    const result = await offerService.getAllOffersByCustomer(params.id);
 
-    res.status(code).json(message);
-};
+    res.status(success.OK).json({ message: result });
+});
+
+const deleteOffersById = rescue(async (req, res) => {
+    const { body } = req;
+
+    const result = await offerService.deleteOffer(body.id);
+
+    res.status(success.OK).json({ message: result });
+});
 
 module.exports = {
     getAllOffers,
     createOffer,
     getAllOffersById,
+    deleteOffersById,
 };
