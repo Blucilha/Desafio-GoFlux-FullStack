@@ -19,6 +19,23 @@ const getAllShippers = async () => {
     }
 };
 
+const getAllShipperById = async (doc) => {
+    const db = await connection();
+
+    try {
+        const result = await db.collection(SHIPPER).find({ doc }).toArray();
+        const format = result.map((element) => {
+            const { _id, ...rest } = element;
+            return rest;
+        });
+
+        return format;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
 const createShipper = async (shipper) => {
     const db = await connection();
 
@@ -70,4 +87,5 @@ module.exports = {
     getAllShippers,
     updateShipper,
     deleteShipper,
+    getAllShipperById,
 };

@@ -13,6 +13,15 @@ const createShipper = Joi.object({
     site: Joi.string().pattern(REGEX_URL).required(),
 }).required();
 
+const updateShipper = Joi.object({
+    name: Joi.string().min(1).required(),
+    doc: Joi.string().pattern(REGEX_CNPJ).required(),
+    about: Joi.string().min(1).required(),
+    active: Joi.boolean().required(),
+    site: Joi.string().pattern(REGEX_URL).required(),
+}).required();
+
 module.exports = {
     createShipper,
+    updateShipper,
 };

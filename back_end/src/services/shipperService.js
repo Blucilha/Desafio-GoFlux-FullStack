@@ -1,6 +1,4 @@
 const shipperModel = require('../models/shipperModel');
-const { code } = require('../utils/code');
-const { message } = require('../utils/message');
 const clientError = require('../utils/clientError');
 const serverError = require('../utils/serverError');
 const schemas = require('../schemas/shipperSchema');
@@ -8,47 +6,45 @@ const schemas = require('../schemas/shipperSchema');
 const getAllShippers = async () => {
     const result = await shipperModel.getAllShippers();
 
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
+    if (result === null) throw serverError.internalServerError();
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    return result;
+};
+
+const getAllShipperById = async (doc) => {
+    const result = await shipperModel.getAllShipperById(doc);
+    if (result === null) throw serverError.internalServerError();
+    if (result.length === 0) throw clientError.notFound();
+
+    return result;
 };
 
 const createShipper = async (shipper) => {
     const { error } = schemas.createShipper.validate(shipper);
     if (error) throw clientError.badRequest(error.details[0].message);
+    
+    const existShipper = await shipperModel.getAllShipperById(shipper.doc);
+    if (existShipper.length > 0) throw clientError.unauthorized('Client existent!');
 
     const result = await shipperModel.createShipper(shipper);
     if (result === null) throw serverError.internalServerError();
-
+    
     return 'Create sucess!';
 };
 
 const updateShipper = async (id, shipper) => {
+    const { error } = schemas.updateShipper.validate(shipper);
+    if (error) throw clientError.badRequest(error.details[0].message);
+
     const result = await shipperModel.updateShipper(id, shipper);
+    if (result === null) throw serverError.internalServerError();
 
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
-
-    return {
-        code: code.STATUS_OK,
-        message: message.UPDATE_SUCESS,
-    };
+    return 'Update success!';
 };
 
 module.exports = {
     createShipper,
     getAllShippers,
+    getAllShipperById,
     updateShipper,
 };

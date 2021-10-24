@@ -6,6 +6,7 @@ const throwController = require('../controllers/throwController');
 
 const routerShipper = express.Router();
 routerShipper.get('/shipper', shipperController.getAllShippers);
+routerShipper.post('/shipper', shipperController.getAllShipperById);
 routerShipper.post('/register-shipper', shipperController.createShipper);
 routerShipper.put('/update-shipper/:id', shipperController.updateShipper);
 
