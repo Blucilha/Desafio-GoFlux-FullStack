@@ -20,10 +20,27 @@ const getAllTransporters = async () => {
     }
 };
 
-const createTransporte = async (shipper) => {
+const getAllTransporterByDoc = async (doc) => {
+    const db = await connection();
+
+    try {
+        const result = await db.collection(TRANSPORTER).find({ doc }).toArray();
+        const format = result.map((element) => {
+            const { _id, ...rest } = element;
+            return rest;
+        });
+
+        return format;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
+const createTransporter = async (transporter) => {
     const db = await connection();
     try {
-        const result = await db.collection(TRANSPORTER).insertOne(shipper);
+        const result = await db.collection(TRANSPORTER).insertOne(transporter);
         return result;
     } catch (err) {
         console.error(err);
@@ -31,12 +48,12 @@ const createTransporte = async (shipper) => {
     }
 };
 
-const updateTransporter = async (id, shipper) => {
-    const { name, doc, about, active, site } = shipper;
+const updateTransporter = async (id, transporter) => {
+    const { name, doc, about, active, site } = transporter;
     const db = await connection();
 
     try {
-        const result = await db.collection(TRANSPORTER).updateOne({ id: +id }, {
+        const result = await db.collection(TRANSPORTER).updateOne({ id }, {
             $set: {
                 name,
                 doc,
@@ -65,8 +82,9 @@ const deleteTransporter = async (id) => {
 };
 
 module.exports = {
-    createTransporte,
+    createTransporter,
     getAllTransporters,
     updateTransporter,
     deleteTransporter,
+    getAllTransporterByDoc,
 };

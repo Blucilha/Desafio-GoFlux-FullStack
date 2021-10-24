@@ -19,7 +19,7 @@ const getAllShippers = async () => {
     }
 };
 
-const getAllShipperById = async (doc) => {
+const getAllShipperByDoc = async (doc) => {
     const db = await connection();
 
     try {
@@ -87,5 +87,5 @@ module.exports = {
     getAllShippers,
     updateShipper,
     deleteShipper,
-    getAllShipperById,
+    getAllShipperByDoc,
 };

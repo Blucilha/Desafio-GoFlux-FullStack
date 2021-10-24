@@ -6,12 +6,13 @@ const throwController = require('../controllers/throwController');
 
 const routerShipper = express.Router();
 routerShipper.get('/shipper', shipperController.getAllShippers);
-routerShipper.post('/shipper', shipperController.getAllShipperById);
+routerShipper.post('/shipper', shipperController.getAllShipperByDoc);
 routerShipper.post('/register-shipper', shipperController.createShipper);
 routerShipper.put('/update-shipper/:id', shipperController.updateShipper);
 
 const routerTransporter = express.Router();
 routerTransporter.get('/transporter', transporterController.getAllTransporters);
+routerTransporter.post('/transporter', transporterController.getAllTransporterByDoc);
 routerTransporter.post('/register-transporter', transporterController.createTransporter);
 routerTransporter.put('/update-transporter/:id', transporterController.updateTransporter);
 
