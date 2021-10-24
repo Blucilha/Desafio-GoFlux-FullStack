@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import FormRegister from '../components/FormRegister';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 function Register() {
-    const NUMBER_SIX = 6;
     const NUMBER_EIGHTEEN = 18;
+    const REGEX_URL = /^(www|http:|https:)+[^\s]+[\w]/;
+
     const history = useHistory();
 
     const [customer, setCustomer] = useState({
@@ -14,10 +16,10 @@ function Register() {
         about: '',
         active: true,
         site: '',
-        password: '',
-        rePassword: '',
         type: 'Embargadora'
     });
+    const [emailInvalid, setEmailInvalid] = useState()
+
     const [disabled, setDisabled] = useState(true);
     const [hide, setHide] = useState(false);
 
@@ -29,20 +31,35 @@ function Register() {
         return 'http://localhost:3001/register-transporter';
     }
 
+    const generateId = () => {
+        return uuidv4();
+    }
+
     const onClickRegister = async (e) => {
         e.preventDefault();
-        const { _type, _rePassword, ...rest } = customer;
+        const { type, ...rest } = customer;
+        const id = generateId()
         const address = typeCustomer(customer.type);
+        console.log({id,...rest, address})
 
         const register = await axios.post(
             address,
-            { ...rest }
+            { id, ...rest }
         )
         .then((data) => data)
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
 
         if(register) {
             history.push('/');
+            return;
+        }
+
+        if(!REGEX_URL.test(customer.site)) {
+            setEmailInvalid('Email inválido!')
+            setHide(true);
             return;
         }
 
@@ -64,7 +81,7 @@ function Register() {
     }
 
     const verifications = (customer) => {
-        const { name, doc, about, site, password, rePassword } = customer;
+        const { name, doc, about, site } = customer;
         if (
             name === ''
             || about === ''
@@ -72,10 +89,7 @@ function Register() {
             || site === ''
         ) {
             return true;
-        } else if ((password.length < NUMBER_SIX) || (password !== rePassword)) {
-            return true;
         }
-
         return false;
     }
 
@@ -91,6 +105,7 @@ function Register() {
             disabled= { disabled }
             onclick={ onClickRegister }
             hide={ hide }
+            email={ emailInvalid }
         />
     )
 }

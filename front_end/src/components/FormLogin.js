@@ -1,7 +1,7 @@
 import React from "react";
 import InputMask from "react-input-mask";
 
-function FormLogin({ handle, disabled, register }) {
+function FormLogin({ handle, register, signIn, message }) {
     return (
         <div>
             <form>
@@ -15,18 +15,28 @@ function FormLogin({ handle, disabled, register }) {
                         mask='99.999.999/9999-99'
                     />
                 </label>
-                <label htmlFor='input-senha'>
-                    Digite a sua senha:
-                    <input
-                        name='password'
-                        type='password'
-                        placeholder='********'
-                        onChange={ handle }
-                    />
+                <label htmlFor='select-type'>
+                    Tipo de empresa:
+                    <select
+                        id='select-type'
+                        name='type'
+                        defaultValue='Embargadora'
+                    >
+                        { ['Embargadora', 'Transportadora'].map((element, index) => {
+                            return (
+                                <option
+                                    value={ element }
+                                    key={ index }
+                                >
+                                    { element }
+                                </option>
+                            )
+                        }) }
+                    </select>
                 </label>
                 <button
                     type='button'
-                    disabled={ disabled }
+                    onClick={ signIn }
                 >
                     Entrar
                 </button>
@@ -37,6 +47,9 @@ function FormLogin({ handle, disabled, register }) {
                     Criar uma conta
                 </button>
             </form>
+            { message && (
+                <p>{ message }</p>
+            ) }
         </div>
     )
 }
