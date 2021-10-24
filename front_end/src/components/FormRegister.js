@@ -1,7 +1,7 @@
 import React from 'react';
 import InputMask from 'react-input-mask';
 
-function FormRegister({ register, checked, disabled, onclick, hide }) {
+function FormRegister({ register, checked, disabled, onclick, hide, email }) {
     
     return (
         <div>
@@ -65,25 +65,6 @@ function FormRegister({ register, checked, disabled, onclick, hide }) {
                         onChange={ register }
                     />
                 </label>
-                <label htmlFor='input-password'>
-                    Digite a sua senha:
-                    <input
-                        id='input-password'
-                        type='text'
-                        name='password'
-                        onChange={ register }
-                        minLength='6'
-                    />
-                </label>
-                <label htmlFor='input-rePassword'>
-                    Digite a senha novamente:
-                    <input
-                        id='input-rePassword'
-                        type='text'
-                        name='rePassword'
-                        onChange={ register }
-                    />
-                </label>
                 <label htmlFor='input-about'>
                     Descrição:
                     <textarea
@@ -105,7 +86,7 @@ function FormRegister({ register, checked, disabled, onclick, hide }) {
             </form>
             { hide && (
                 <p>
-                    Usuário existente.
+                    { email || "Usuário existente."}
                 </p>
             ) }
             

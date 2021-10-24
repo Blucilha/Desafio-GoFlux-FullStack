@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import FormLogin from "../components/FormLogin";
+import axios from "axios";
 
 function Login() {
     const history = useHistory();
 
     const [data, setData] = useState({
         doc: '',
-        password: '',
+        type: 'Embargadora',
     });
-    const [disabled, setDisabled] = useState(true);
+    const [message, setMessage] = useState();
 
     const handleData = ({ target }) => {
         const { name, value } = target;
@@ -20,21 +21,46 @@ function Login() {
         history.push('/register')
     }
 
-    useEffect(() => {
-        const NUMBER_SIX = 6;
-        const NUMBER_FOURTEEN = 14;
-        const { doc, password } = data;
-        if (doc.length === NUMBER_FOURTEEN && password.length >= NUMBER_SIX) {
-            setDisabled(false)
+    const typeCustomer = (type) => {
+        if (type === 'Embargadora') {
+            return 'http://localhost:3001/shipper';
         }
-    }, [data]);
 
+        return 'http://localhost:3001/transporter';
+    }
+
+    const onClickIn = async (e) => {
+        e.preventDefault();
+        const address = typeCustomer(data.type);
+        const { doc } = data;
+
+        const loging = await axios.post(
+            address,
+            { doc },
+        )
+        .then((data) => data)
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
+
+        if (!loging) {
+            setMessage('Usuário não encontrado!');
+            return;
+        }
+
+        if (loging.status === 200) {
+            history.push(`/shipper/${ loging.data.message.id }`);
+            return;
+        }
+    }
 
     return (
         <FormLogin
             handle={ handleData }
-            disabled={ disabled }
             register={ onClickRegister }
+            signIn={ onClickIn }
+            message={ message }
         />
     )
 }
