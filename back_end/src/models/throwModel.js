@@ -31,6 +31,18 @@ const getAllThrowsById = async (id_provider) => {
     }
 };
 
+const getAllThrowsByThrow = async (id_offer) => {
+    const db = await connection();
+    try {
+        const result = await db.collection(THROW).find({ id_offer }).toArray();
+        const format = formater(result);
+        return format;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
 const createThrow = async (trhow) => {
     const db = await connection();
     try {
@@ -42,10 +54,10 @@ const createThrow = async (trhow) => {
     }
 };
 
-const deleteThrow = async (id) => {
+const deleteThrow = async (idOffer) => {
     const db = await connection();
     try {
-        const result = db.collection(THROW).deleteOne({ id });
+        const result = db.collection(THROW).deleteOne({ idOffer });
         return result;
     } catch (err) {
         console.error(err);
@@ -58,4 +70,5 @@ module.exports = {
     getAllThrows,
     deleteThrow,
     getAllThrowsById,
+    getAllThrowsByThrow,
 };

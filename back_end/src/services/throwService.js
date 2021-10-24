@@ -1,55 +1,37 @@
 /* eslint-disable camelcase */
 const throwModel = require('../models/throwModel');
-const { code } = require('../utils/code');
-const { message } = require('../utils/message');
-const schema = require('../schemas/throwSchema');
+const clientError = require('../utils/clientError');
+const serverError = require('../utils/serverError');
+const schemas = require('../schemas/throwSchema');
 
 const getAllThrows = async () => {
     const result = await throwModel.getAllThrows();
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    if (result === null) throw serverError.internalServerError();
+
+    return result;
 };
 
 const getAllThrowsByProvider = async (id_provider) => {
     const result = await throwModel.getAllThrowsById(id_provider);
-    if (result === null) {
-        return {
-            code: code.SERVER_INTERNAL_ERROR,
-            message: message.INTERNAL_SERVER_ERROR,
-        };
-    }
+    if (result === null) throw serverError.internalServerError();
+    if (result.length === 0) throw clientError.notFound();
 
-    return {
-        code: code.STATUS_OK,
-        message: result,
-    };
+    return result;
 };
 
 const createThrow = async (Throw, id_provider) => {
-    const { error } = schema.createThrow.validate({ id_provider, ...Throw });
+    const { id_offer, ...rest } = Throw;
+    const { error } = schemas.createThrow.validate({ id_provider, id_offer, ...rest });
+    if (error) throw clientError.badRequest(error.details[0].message);
+    
+    const existThrow = await throwModel.getAllThrowsByThrow(id_offer);
+    if (existThrow.length > 0) throw clientError.unauthorized('Already has throw!');
 
-    if (error) {
-        return {
-            code: code.BAD_REQUEST,
-            message: error.details[0].message,
-        };
-    }
-
-    const result = await throwModel.createThrow({ ...Throw, id_provider });
-
-    return {
-        code: code.CREATED,
-        message: result,
-    };
+    const result = await throwModel.createThrow({ id_provider, id_offer, ...rest });
+    if (result === null) throw serverError.internalServerError();
+    
+    return 'Create sucess!';
 };
 
 module.exports = {

@@ -26,8 +26,8 @@ const createOffer = async (offer, id_customer) => {
     const { error } = schemas.createOffer.validate({ id, id_customer, ...rest });
     if (error) throw clientError.badRequest(error.details[0].message);
     
-    const existShipper = await offerModel.getOffersByIdCustomer(id_customer);
-    if (existShipper.length > 0) throw clientError.unauthorized('Offer existent!');
+    const existOffer = await offerModel.getOffersByIdCustomer(id_customer);
+    if (existOffer.length > 0) throw clientError.unauthorized('Offer existent!');
 
     const result = await offerModel.createOffer({ id, id_customer, ...rest });
     if (result === null) throw serverError.internalServerError();
