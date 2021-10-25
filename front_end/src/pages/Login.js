@@ -50,7 +50,11 @@ function Login() {
         }
 
         if (loging.status === 200) {
-            history.push(`/shipper/${ loging.data.message.id }`);
+            const setInfor = JSON.stringify(loging.data.message);
+            localStorage.setItem('information', setInfor);
+            history.push(`/shipper/${ loging.data.message.id }`,
+            { params: loging.data.message.id }
+            );
             return;
         }
     }
