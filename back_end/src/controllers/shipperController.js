@@ -10,9 +10,10 @@ const getAllShippers = rescue(async (_req, res) => {
 
 const getAllShipperByDoc = rescue(async (req, res) => {
     const { doc } = req.body;
+    
     const result = await shipperService.getAllShipperByDoc(doc);
 
-    res.status(success.OK).json({ message: result });
+    res.status(success.OK).json({ message: result[0] });
 });
 
 const createShipper = rescue(async (req, res) => {
