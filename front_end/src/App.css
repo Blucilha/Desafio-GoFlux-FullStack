@@ -1,1 +1,5 @@
-
+body {
+    background:  no-repeat url('/src/images/caminhao-login.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

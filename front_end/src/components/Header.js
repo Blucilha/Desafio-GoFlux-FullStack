@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/Header.css'
 import { useHistory } from 'react-router-dom';
 
 function Header({ infor }) {
@@ -12,7 +13,7 @@ function Header({ infor }) {
     }
 
     return (
-        <header>
+        <header className='header'>
             <h1>{ infor.name }</h1>
                 <ul>
                     <li>

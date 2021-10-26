@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --branco: rgb( 203, 197, 181);
+    --cinza-escuro: rgb(49, 43, 43);
+}
+
+.page-register {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(rgba(111, 114, 117, 0.8), rgba(41, 42, 43, 0.8)100%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea {
+    resize: none;
+    width: 550px;
+    height: 150px;
+    margin: 20px;
+
+}
+
+select {
+    height: 50px;
+}
+.form-register label {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 600px;
+    height: 700px;
+
+    background: linear-gradient(rgba(111, 114, 117, 0.8), rgba(41, 42, 43, 0.8)100%);
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.form-register div button {
+    background: none;
+    border: none;
+
+    font-size: large;
+    cursor: pointer;
+
+    width: 250px;
+    height: 30px;
+
+    margin-bottom: 20px;
+}
+
+.form-register div button:hover {
+    background-color: var(--cinza-escuro);
+}
+
+.form-register div button:disabled {
+    color: var(--branco);
+}
+
+.form-register img {
+    width: 150px;
+    height: 50px;
+    margin: 50px;
+}
+
+.row-register {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+
+    width: 93%;
+    height: 50px;
+}
+
+.row-register .input {
+    width: 300px;
+    height: 25px;
+}
+
+.row-register input[type=text] {
+    width: 250px;
+    height: 25px;
+    text-align: center;
+}
