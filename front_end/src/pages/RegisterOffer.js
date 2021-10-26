@@ -44,7 +44,6 @@ function RegisterOffer() {
     }
 
     const clickRegisterOffer = async (e) => {
-        e.preventDefault();
         const id = generateId();
         const { initial_value, amount, from, to, amount_type } = newOffer;
 
