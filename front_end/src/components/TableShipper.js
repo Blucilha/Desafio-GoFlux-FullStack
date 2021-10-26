@@ -35,12 +35,6 @@ function TableShipper({ throws, filter, textButton }) {
         throws.length < 1
         ? ( 
             <div className='table-throws'>
-                <button
-                    type='button'
-                    onClick={ filter }
-                >
-                    { textButton }
-                </button>
                 <h3>Sem lances no momento.</h3>
             </div>
         )

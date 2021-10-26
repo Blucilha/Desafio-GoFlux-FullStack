@@ -9,7 +9,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     Origem:{ ' ' }
                     <input
                         type='text'
-                        placeholder='Cidade - UF'
+                        placeholder='Cidade/UF'
                         id='input-from'
                         onChange={ handle }
                         name='from'
@@ -19,7 +19,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     Destino:{ ' ' }
                     <input
                         type='text'
-                        placeholder='Cidade - UF'
+                        placeholder='Cidade/UF'
                         id='input-to'
                         onChange={ handle }
                         name='to'

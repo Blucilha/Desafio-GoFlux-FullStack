@@ -36,7 +36,9 @@ function RegisterOffer() {
     }
 
     const formateLocal = (local) => {
-        const formater = local.split('-');
+        const formater = local.split('/').map((elem) => {
+            return elem.trim();
+        });
 
         return `${formater[0]} - ${formater[1].toUpperCase()}`;
     }

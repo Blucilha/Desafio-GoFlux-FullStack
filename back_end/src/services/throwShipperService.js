@@ -7,8 +7,9 @@ const throwByShipper = async (id) => {
 
     const result = getOffersByIdCustomer
         .map((elem) => getAllThrows.filter((throws) => throws.id_offer === elem.id)[0]);
-
-    return result;
+    const notEmpty = result.filter((elem) => elem !== undefined);
+    console.log(notEmpty);
+    return notEmpty;
 };
 
 module.exports = throwByShipper;
