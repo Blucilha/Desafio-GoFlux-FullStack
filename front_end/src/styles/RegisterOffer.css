@@ -1,0 +1,33 @@
+.cadaster-offer {
+    display: flex;
+    margin-left: 20%;
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    margin-top: 60px;
+    padding: 20px;
+
+    background: rgb(231, 222, 222, 0.8);
+}
+
+.cadaster-offer form {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 60px;
+
+    padding: 20px;
+
+    width: 450px;
+    height: 600px;
+}
+.cadaster-offer form input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.cadaster-offer table {
+    margin-left: 60px;
+}
+
+

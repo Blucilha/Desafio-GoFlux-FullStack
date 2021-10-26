@@ -3,10 +3,10 @@ import React from 'react';
 function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
 
     return (
-        <div>
+        <div className='form-offer'>
             <form>
                 <label htmlFor='input-from' >
-                    Origem:
+                    Origem:{ ' ' }
                     <input
                         type='text'
                         placeholder='Cidade - UF'
@@ -16,7 +16,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     />
                 </label>
                 <label htmlFor='input-to' >
-                    Destino:
+                    Destino:{ ' ' }
                     <input
                         type='text'
                         placeholder='Cidade - UF'
@@ -26,7 +26,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     />
                 </label>
                 <label htmlFor='input-value' >
-                    Lance inicial:
+                    Lance inicial:{ ' ' }
                     <input
                         type='number'
                         id='input-value'
@@ -37,7 +37,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     />
                 </label>
                 <label htmlFor='input-amount' >
-                    Quantidade:
+                    Quantidade:{ ' ' }
                     <input
                         type='number'
                         id='input-amount'
@@ -48,7 +48,7 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                     />
                 </label>
                 <label htmlFor='input-type' >
-                    Medida:
+                    Medida:{ ' ' }
                     <input
                         type='text'
                         id='input-type'
@@ -56,18 +56,20 @@ function FormRegisterOffer({ handle, registerOffer, message, clickBack }) {
                         name='amount_type'
                     />
                 </label>
-                <button
-                    type='button'
-                    onClick={ registerOffer }
-                >
-                    Cadastrar
-                </button>
-                <button
-                    type='button'
-                    onClick={ clickBack }
-                >
-                    Voltar
-                </button>
+                <div className='buttons'>
+                    <button
+                        type='button'
+                        onClick={ registerOffer }
+                    >
+                        Cadastrar
+                    </button>
+                    <button
+                        type='button'
+                        onClick={ clickBack }
+                    >
+                        Voltar
+                    </button>
+                </div>
             </form>
             { message && (
                 <p>{ message }</p>

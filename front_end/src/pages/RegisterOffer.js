@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import TableOffer from '../components/TableOffer';
 import Header from '../components/Header';
 import NavBarShipper from '../components/NavBarShipper';
+import '../styles/RegisterOffer.css';
 
 function RegisterOffer() {
     const { infor, offers, setIdOffer } = useContext(ShipperContext);
@@ -87,13 +88,15 @@ function RegisterOffer() {
                 infor={ infor }
             />
             <NavBarShipper infor={ infor }/>
-            <FormRegisterOffer
-                handle={ handleRegisterOffer }
-                registerOffer={ clickRegisterOffer }
-                message={ message }
-                clickBack={ clickBack }
-            />
-            <TableOffer Offers={ offers } />
+            <div className='cadaster-offer'>
+                <FormRegisterOffer
+                    handle={ handleRegisterOffer }
+                    registerOffer={ clickRegisterOffer }
+                    message={ message }
+                    clickBack={ clickBack }
+                />
+                <TableOffer Offers={ offers } />
+            </div>
         </div>
     )
 }
