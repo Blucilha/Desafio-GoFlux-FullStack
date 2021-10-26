@@ -3,6 +3,7 @@ const shipperController = require('../controllers/shipperController');
 const transporterController = require('../controllers/transporterController');
 const offerController = require('../controllers/offerController');
 const throwController = require('../controllers/throwController');
+const throwShipperController = require('../controllers/throwShipperController');
 
 const routerShipper = express.Router();
 routerShipper.get('/shipper', shipperController.getAllShippers);
@@ -27,9 +28,13 @@ routerThrow.get('/throw', throwController.getAllThrows);
 routerThrow.get('/throw/:id', throwController.getAllThrowsByIdProvider);
 routerThrow.post('/register-throw/:id', throwController.createThrow);
 
+const routerThrowsByCustomer = express.Router();
+routerThrowsByCustomer.get('/throw-shipper/:id', throwShipperController);
+
 module.exports = {
     routerShipper,
     routerTransporter,
     routeOffer,
     routerThrow,
+    routerThrowsByCustomer,
 };

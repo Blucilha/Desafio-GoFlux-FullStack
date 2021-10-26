@@ -5,6 +5,7 @@ const {
     routerTransporter,
     routeOffer,
     routerThrow,
+    routerThrowsByCustomer,
 } = require('./router');
 const handlerError = require('../middlewares/handlerError');
 
@@ -20,6 +21,7 @@ app.use(routerShipper);
 app.use(routerTransporter);
 app.use(routeOffer);
 app.use(routerThrow);
+app.use(routerThrowsByCustomer);
 
 app.use(handlerError);
 app.all('*', (_req, res) => res.status(404).json({ message: 'Not Found' }));

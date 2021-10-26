@@ -7,7 +7,6 @@ const schemas = require('../schemas/offerSchema');
 
 const getAllOffers = async () => {
     const result = await offerModel.getAllOffers();
-
     if (result === null) throw serverError.internalServerError();
 
     return result;
@@ -16,7 +15,6 @@ const getAllOffers = async () => {
 const getAllOffersByCustomer = async (id_customer) => {
     const result = await offerModel.getOffersByIdCustomer(id_customer);
     if (result === null) throw serverError.internalServerError();
-    if (result.length === 0) throw clientError.notFound();
 
     return result;
 };

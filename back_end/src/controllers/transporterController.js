@@ -13,7 +13,7 @@ const getAllTransporterByDoc = rescue(async (req, res) => {
 
     const result = await transporterService.getAllTransporterByDoc(doc);
 
-    res.status(success.OK).json({ message: result });
+    res.status(success.OK).json({ message: result[0] });
 });
 
 const createTransporter = rescue(async (req, res) => {

@@ -12,10 +12,9 @@ const getAllThrows = async () => {
     return result;
 };
 
-const getAllThrowsByProvider = async (id_provider) => {
-    const result = await throwModel.getAllThrowsById(id_provider);
+const getAllThrowsByProvider = async (id_offer) => {
+    const result = await throwModel.getAllThrowsById(id_offer);
     if (result === null) throw serverError.internalServerError();
-    if (result.length === 0) throw clientError.notFound();
 
     return result;
 };
@@ -25,9 +24,6 @@ const createThrow = async (Throw, id_provider) => {
     const { error } = schemas.createThrow.validate({ id_provider, id_offer, ...rest });
     if (error) throw clientError.badRequest(error.details[0].message);
     
-    const existThrow = await throwModel.getAllThrowsByThrow(id_offer);
-    if (existThrow.length > 0) throw clientError.unauthorized('Already has throw!');
-
     const result = await throwModel.createThrow({ id_provider, id_offer, ...rest });
     if (result === null) throw serverError.internalServerError();
     
