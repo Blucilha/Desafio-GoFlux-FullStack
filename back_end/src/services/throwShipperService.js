@@ -6,9 +6,9 @@ const throwByShipper = async (id) => {
     const getOffersByIdCustomer = await offerModel.getOffersByIdCustomer(id);
 
     const result = getOffersByIdCustomer
-        .map((elem) => getAllThrows.filter((throws) => throws.id_offer === elem.id));
+        .map((elem) => getAllThrows.filter((throws) => throws.id_offer === elem.id)[0]);
 
-    return result[0];
+    return result;
 };
 
 module.exports = throwByShipper;
