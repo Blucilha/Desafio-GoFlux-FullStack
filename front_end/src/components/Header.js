@@ -16,7 +16,9 @@ function Header({ infor }) {
             <h1>{ infor.name }</h1>
                 <ul>
                     <li>
-                        <a href={`${ history.location.pathname }`}>Perfil</a>
+                        <a href={`/profile/${ infor.id}`}>
+                            Perfil
+                        </a>
                     </li>
                 </ul>
                 <button

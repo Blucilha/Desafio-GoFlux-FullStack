@@ -7,15 +7,19 @@ function Provider({ children }) {
     const [throws, setThrows] = useState([]);
     const [offers, setOffers] = useState([]);
     const [idOffer, setIdOffer] = useState('');
+    const [infor, setInfor] = useState({
+        id: '',
+    })
 
     const history = useHistory();
 
-    const getInfor = localStorage.getItem('information');
-    const infor = JSON.parse(getInfor);
-
     useEffect(() => {
-        if (!infor.id) return history.push('/');
+        const getInfor = localStorage.getItem('information');
+        if (!getInfor) return history.push('/');
+        setInfor(JSON.parse(getInfor));
+    }, [history]);
 
+    useEffect(() => {   
         async function getOffersById() {
             await axios.get(`http://localhost:3001/offer/${ infor.id }`)
             .then((data) => setOffers(data.data.message))

@@ -2,6 +2,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ShipperProvider from './api/ShipperProvider';
 import TransporterProvider from './api/TransporterProvider';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 import RegisterOffer from './pages/RegisterOffer';
 import Shipper from './pages/Shipper';
@@ -13,7 +14,7 @@ function Routes() {
         <Switch>
             <Route path={ '/login' } component={ Login } />
             <Route path={ '/register' } component={ Register } />
- 
+            <Route path={ '/profile/:id' } component={ Profile } />
             <Route path='/shipper/register-offer/:id'>
                 <ShipperProvider>
                     <RegisterOffer />
