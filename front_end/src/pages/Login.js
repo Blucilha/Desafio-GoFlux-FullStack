@@ -8,7 +8,7 @@ function Login() {
 
     const [data, setData] = useState({
         doc: '',
-        type: 'Embargadora',
+        type: '',
     });
     const [message, setMessage] = useState();
 
@@ -21,27 +21,18 @@ function Login() {
         history.push('/register')
     }
 
-    const typeCustomer = (type) => {
-        if (type === 'Embargadora') {
-            return 'http://localhost:3001/shipper';
-        }
-
-        return 'http://localhost:3001/transporter';
-    }
 
     const onClickIn = async (e) => {
         e.preventDefault();
-        const address = typeCustomer(data.type);
-        const { doc } = data;
+        const { doc, type } = data;
 
         const loging = await axios.post(
-            address,
+            `http://localhost:3001/${ type }`,
             { doc },
         )
         .then((data) => data)
         .catch((err) => {
             console.error(err);
-            return null;
         });
 
         if (!loging) {
@@ -52,9 +43,7 @@ function Login() {
         if (loging.status === 200) {
             const setInfor = JSON.stringify(loging.data.message);
             localStorage.setItem('information', setInfor);
-            history.push(`/shipper/${ loging.data.message.id }`,
-            { params: loging.data.message.id }
-            );
+            history.push(`/${ data.type }/${ loging.data.message.id }`);
             return;
         }
     }

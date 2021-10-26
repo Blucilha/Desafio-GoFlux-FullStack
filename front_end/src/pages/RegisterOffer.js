@@ -5,14 +5,16 @@ import FormRegisterOffer from '../components/FormRegisterOffer';
 import ShipperContext from '../api/ShipperContext';
 import { v4 as uuidv4 } from 'uuid';
 import TableOffer from '../components/TableOffer';
+import Header from '../components/Header';
+import NavBarShipper from '../components/NavBarShipper';
 
 function RegisterOffer() {
     const { infor, offers, setIdOffer } = useContext(ShipperContext);
     const history = useHistory();
 
     const [newOffer, setNewOffer] = useState({
-        from: '',
-        to: '',
+        from: '-',
+        to: '-',
         initial_value: 0,
         amount: 0,
         amount_type: '',
@@ -32,7 +34,14 @@ function RegisterOffer() {
         return uuidv4();
     }
 
+    const formateLocal = (local) => {
+        const formater = local.split('-');
+
+        return `${formater[0]} - ${formater[1].toUpperCase()}`;
+    }
+
     const clickRegisterOffer = async (e) => {
+        e.preventDefault();
         const id = generateId();
         const { initial_value, amount, from, to, amount_type } = newOffer;
 
@@ -40,8 +49,8 @@ function RegisterOffer() {
         {
             id,
             id_customer: infor.id,
-            from,
-            to,
+            from: formateLocal(from),
+            to: formateLocal(to),
             initial_value,
             amount,
             amount_type
@@ -74,6 +83,10 @@ function RegisterOffer() {
 
     return (
         <div>
+            <Header
+                infor={ infor }
+            />
+            <NavBarShipper infor={ infor }/>
             <FormRegisterOffer
                 handle={ handleRegisterOffer }
                 registerOffer={ clickRegisterOffer }

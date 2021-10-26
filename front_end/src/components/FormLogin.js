@@ -20,18 +20,27 @@ function FormLogin({ handle, register, signIn, message }) {
                     <select
                         id='select-type'
                         name='type'
-                        defaultValue='Embargadora'
+                        defaultValue='-'
+                        onChange={ handle }
                     >
-                        { ['Embargadora', 'Transportadora'].map((element, index) => {
-                            return (
-                                <option
-                                    value={ element }
-                                    key={ index }
-                                >
-                                    { element }
-                                </option>
-                            )
-                        }) }
+                        <option
+                            value='-'
+                            name='type'
+                        >
+                            -
+                        </option>
+                        <option
+                            value='shipper'
+                            name='type'
+                        >
+                            Embarcadora
+                        </option>
+                        <option
+                            value='transporter'
+                            name='type'
+                        >
+                            Transportadora
+                        </option>
                     </select>
                 </label>
                 <button
