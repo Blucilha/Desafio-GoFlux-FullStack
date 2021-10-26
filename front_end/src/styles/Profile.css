@@ -1,0 +1,28 @@
+.session {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-profile {
+    background: linear-gradient(rgba(111, 114, 117, 0.8), rgba(41, 42, 43, 0.8)100%);
+    width: 400px;
+    height: 150px;
+
+    padding: 40px;
+}
+
+.card-profile p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-profile h3{
+    font-size: x-large;
+    text-align: center;
+}
