@@ -13,8 +13,9 @@ function Header({ infor }) {
     }
 
     return (
-        <header className='header'>
+        <header>
             <h1>{ infor.name }</h1>
+            <div>
                 <ul>
                     <li>
                         <a href={`/profile/${ infor.id}`}>
@@ -27,6 +28,7 @@ function Header({ infor }) {
                 >
                     Sair
                 </button>
+            </div>
         </header>
     )
 }

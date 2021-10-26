@@ -9,10 +9,7 @@ function Transporter() {
     const { infor, offers } = useContext(TransporterContext);
 
     const [message, setMessage] = useState('');
-    const [throws, setThrows] = useState({
-        value: 0,
-        amount: 0,
-    });
+    const [throws, setThrows] = useState({});
 
     const handleOnThrow = ({ target }) => {
         const { name, value } = target;
@@ -22,7 +19,7 @@ function Transporter() {
         })
 
         if (name === 'value' || name === 'amount') {
-            setThrows({ ...throws, [name]: ( +value || 1).toFixed(2) });
+            setThrows({ ...throws, [name]: ( +value).toFixed(2) });
         }
     }
 
@@ -37,12 +34,11 @@ function Transporter() {
         }
         )
             .then((data) => {
-                console.log(data)
+                setThrows({});
                 return data;
             })
             .catch((err) => {
                 console.error(err);
-                return null;
             });
 
         if (!result) {
@@ -59,13 +55,15 @@ function Transporter() {
     return (
         <div>
             <Header infor={ infor }/>
-            <NavBarTransporter infor={ infor }/>
-            <CardOfferTransporter
-                offers={ offers }
-                handleOnThrow={ handleOnThrow }
-                message={ message }
-                clickThrow={ clickRegisterThrow }
-            />
+            <div>
+                <NavBarTransporter infor={ infor }/>
+                <CardOfferTransporter
+                    offers={ offers }
+                    handleOnThrow={ handleOnThrow }
+                    message={ message }
+                    clickThrow={ clickRegisterThrow }
+                />
+            </div>
         </div>
     )
 }
