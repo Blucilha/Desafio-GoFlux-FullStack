@@ -1,0 +1,24 @@
+.navbar {
+    position: absolute;
+
+    margin-top: 50px;
+    width: 20%;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+
+}
+.links a {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px 0;
+
+    background-color: rgba(111,114,117,0.7);
+}
+
+.links a:hover {
+    background: linear-gradient(0deg, rgba(111,114,117,0.7) 14%, rgba(55,74,93,1) 65%);;
+}

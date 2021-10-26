@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/TableThrows.css'
 
 function TableThrows({ Trows }) {
 
@@ -10,28 +11,30 @@ function TableThrows({ Trows }) {
 
     const throws = (Trows) => {
         return (
-            <table>
-                <thead>
-                    <tr>
-                        { tableHeader.map((elem, index) => {
+            <div className='table'>
+                <table>
+                    <thead>
+                        <tr>
+                            { tableHeader.map((elem, index) => {
+                                return (
+                                    <th key={ index } >{ elem }</th>
+                                )
+                            }) }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { Trows.map((elem, index) => {
                             return (
-                                <th key={ index } >{ elem }</th>
+                                <tr key={ index }>
+                                    <td>{ elem.id_offer }</td>
+                                    <td>{ elem.value }</td>
+                                    <td>{ elem.amount }</td>
+                                </tr>
                             )
                         }) }
-                    </tr>
-                </thead>
-                <tbody>
-                    { Trows.map((elem, index) => {
-                        return (
-                            <tr key={ index }>
-                                <td>{ elem.id_offer }</td>
-                                <td>{ elem.value }</td>
-                                <td>{ elem.amount }</td>
-                            </tr>
-                        )
-                    }) }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 

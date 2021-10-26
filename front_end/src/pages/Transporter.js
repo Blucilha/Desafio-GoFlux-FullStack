@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import '../styles/Transporter.css';
+
 import TransporterContext from '../api/TransporterContext';
 import CardOfferTransporter from '../components/CardOfferTransporter';
 import Header from '../components/Header';
@@ -53,9 +55,9 @@ function Transporter() {
     }
 
     return (
-        <div>
+        <div className='page-transporter'>
             <Header infor={ infor }/>
-            <div>
+            <div className='container'>
                 <NavBarTransporter infor={ infor }/>
                 <CardOfferTransporter
                     offers={ offers }

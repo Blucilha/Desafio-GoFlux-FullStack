@@ -1,26 +1,24 @@
 import React from 'react';
+import '../styles/NavBarTransporter.css'
 
 function NavBarTransporter({ infor }) {
 
     return (
-        <aside>
-            <ul>
-                <li>
-                    <a
-                        href={`/transporter/throws/${ infor.id }`}
-                    >
-                        Lances realizados 
-                    </a>
-                </li>
-                <li>
+        <div className='navbar'>
+            <div className='links'>
+                <a
+                    href={`/transporter/throws/${ infor.id }`}
+                >
+                    Lances realizados 
+                </a>
+
                 <a
                     href={`/transporter/${ infor.id }`}
                 >
                     Ofertas
                 </a>
-                </li>
-            </ul>
-        </aside>
+            </div>
+        </div>
     )
 }
 
