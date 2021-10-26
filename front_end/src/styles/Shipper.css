@@ -1,0 +1,16 @@
+.table-throws {
+    position: absolute;
+    margin-left: 30%;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+}
+
+.table-throws table {
+    margin: 60px;
+    background: rgb(231, 222, 222, 0.8);
+}
+
+.table-throws table th, td, tr {
+    border: 1px solid rgba(111,114,117,0.7);
+}

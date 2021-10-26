@@ -4,6 +4,7 @@ import ShipperContext from '../api/ShipperContext';
 import Header from '../components/Header';
 import NavBarShipper from '../components/NavBarShipper';
 import TableShipper from '../components/TableShipper';
+import '../styles/Shipper.css';
 
 function Shipper() {
     const { throws, infor } = useContext(ShipperContext);

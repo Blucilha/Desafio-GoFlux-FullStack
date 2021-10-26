@@ -1,24 +1,24 @@
 import React from 'react';
+import '../styles/NavBarTransporter.css'
 
 function NavBarShipper({ infor }) {
 
     return (
-        <aside>
-            <ul>
-                <li>
-                    <a
-                        href={`/shipper/register-offer/${ infor.id }`}
-                    >
-                        Cadastrar Ofertas
-                    </a>
-                </li>
+        <div className='navbar'>
+            <div className='links'>
+                <a
+                    href={`/shipper/register-offer/${ infor.id }`}
+                >
+                    Cadastrar Ofertas
+                </a>
+
                 <a
                     href={`/shipper/${ infor.id }`}
                 >
                     Lances
                 </a>
-            </ul>
-        </aside>
+            </div>
+        </div>
     )
 }
 

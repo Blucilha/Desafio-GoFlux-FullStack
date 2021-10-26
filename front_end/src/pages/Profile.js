@@ -13,7 +13,7 @@ function Profile() {
         if (!getInfor) return history.push('/');
         setInfor(JSON.parse(getInfor));
     }, [history]);
-
+    console.log(infor)
     return (
         <div>
             <Header infor={ infor } />
@@ -23,7 +23,7 @@ function Profile() {
                     <p><strong>ID:</strong>{ ' ' }{ infor.id }</p>
                     <p><strong>CNPJ:</strong>{ ' ' }{ infor.doc }</p>
                     <p><strong>SITE:</strong>{ ' ' }{ infor.site }</p>
-                    <p><strong>ATIVO:</strong>{ ' ' }{ infor.active.toString() }</p>
+                    <p><strong>ATIVO:</strong>{ ' ' }{ `${ infor.active }` }</p>
                     <p><strong>DESCRIÇÃO:</strong>{ ' ' }{ infor.about }</p>
                 </div>
             </section>

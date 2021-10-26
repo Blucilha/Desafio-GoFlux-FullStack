@@ -34,7 +34,7 @@ function TableShipper({ throws, filter, textButton }) {
     return (
         throws.length < 1
         ? ( 
-            <div>
+            <div className='table-throws'>
                 <button
                     type='button'
                     onClick={ filter }
@@ -45,7 +45,7 @@ function TableShipper({ throws, filter, textButton }) {
             </div>
         )
         : (
-            <div>
+            <div className='table-throws'>
                 <button
                     type='button'
                     onClick={ filter }
