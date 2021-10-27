@@ -9,8 +9,7 @@ O projeto foi desenvolvido utilizando:
 ## Como utilizar
 1. Ter uma IDE instalada;
 2. Abrir o terminal na pasta que você deseja clonar o projeto e digitar a seguinte linha de comando:
-    `git clone https://github.com/Blucilha/Desafio-GoFlux-FullStack`
-    no diretório que você deseja clonar o projeto;
+    `git clone https://github.com/Blucilha/Desafio-GoFlux-FullStack`;
 3. Após a clonagem finalizar entre na pasta raiz do projeto;
 5. Abra a pasta de front-end;
 6. Abra o terminal na pasta raiz do front-end e digite:
