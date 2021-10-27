@@ -7,7 +7,7 @@ O projeto foi desenvolvido utilizando:
 - Node.Js;
 
 ## Como utilizar
-1. Ter uma IDE instalada;
+1. Ter uma IDE instalada e o mongoDB;
 2. Abrir o terminal na pasta que você deseja clonar o projeto e digitar a seguinte linha de comando:
     `git clone https://github.com/Blucilha/Desafio-GoFlux-FullStack`;
 3. Após a clonagem finalizar entre na pasta raiz do projeto;
