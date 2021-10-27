@@ -7,7 +7,7 @@ O projeto foi desenvolvido utilizando:
 - Node.Js;
 
 ## Como utilizar
-1. Instalar o Vs Code (caso não o tenha ainda);
+1. Ter uma IDE instalada;
 2. Abrir o terminal na pasta que você deseja clonar o projeto e digitar a seguinte linha de comando:
     `git clone https://github.com/Blucilha/Desafio-GoFlux-FullStack`
     no diretório que você deseja clonar o projeto;
