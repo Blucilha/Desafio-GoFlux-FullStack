@@ -17,7 +17,7 @@ O projeto foi desenvolvido utilizando:
 7. Após terminado a instalação das depêndencias, digite no terminal:
     `npm start`;
 8. Deve-se aguardar um momento e, se ocorreu bem, abrirá automaticamente uma página com a aplicação funcionando;
-9. Faça o mesmo procedimento nos tópicos de 5 à 8;
+9. Faça o mesmo procedimento nos tópicos de 5 à 8, mas desta vez na pasta de backend;
 10. Aguarde um pouco e o server logo estará no ar;
 11. Use e abuso da aplicação como quiser;
 12. Sinta-se livre para entrar em contato e dar novas ideias ou sugestões.
